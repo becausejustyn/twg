@@ -1,0 +1,131 @@
+<html>
+
+<head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<title>Title</title>
+</head>
+
+<body>
+
+<p>This is an R HTML document. When you click the <b>Knit HTML</b> button a web page will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(tidyverse)</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
+</pre></div>
+<div class="message"><pre class="knitr r">## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+## ✓ tibble  3.1.5     ✓ dplyr   1.0.7
+## ✓ tidyr   1.1.4     ✓ stringr 1.4.0
+## ✓ readr   2.0.2     ✓ forcats 0.5.1
+</pre></div>
+<div class="message"><pre class="knitr r">## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(scales)</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## 
+## Attaching package: 'scales'
+</pre></div>
+<div class="message"><pre class="knitr r">## The following object is masked from 'package:purrr':
+## 
+##     discard
+</pre></div>
+<div class="message"><pre class="knitr r">## The following object is masked from 'package:readr':
+## 
+##     col_factor
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(kableExtra)</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## 
+## Attaching package: 'kableExtra'
+</pre></div>
+<div class="message"><pre class="knitr r">## The following object is masked from 'package:dplyr':
+## 
+##     group_rows
+</pre></div>
+</div></div>
+
+<p>You can also embed plots, for example:</p>
+
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">tibble</span><span class="hl std">(</span>
+  <span class="hl str">&quot;Wave&quot;</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">75</span><span class="hl std">,</span>
+  <span class="hl str">&quot;FE Wave Reward&quot;</span> <span class="hl std">=</span> <span class="hl num">119700</span> <span class="hl opt">+</span> <span class="hl std">(Wave</span> <span class="hl opt">*</span> <span class="hl num">13300</span><span class="hl std">),</span>
+  <span class="hl str">&quot;FE Cumulative Reward&quot;</span> <span class="hl std">=</span> <span class="hl kwd">cumsum</span><span class="hl std">(`FE Wave Reward`),</span>
+  <span class="hl str">&quot;Exp Wave Reward&quot;</span> <span class="hl std">=</span> <span class="hl num">14400</span> <span class="hl opt">+</span> <span class="hl std">(Wave</span> <span class="hl opt">*</span> <span class="hl num">1600</span><span class="hl std">),</span>
+  <span class="hl str">&quot;Exp Cumulative Reward&quot;</span> <span class="hl std">=</span> <span class="hl kwd">cumsum</span><span class="hl std">(`Exp Wave Reward`)</span>
+  <span class="hl std">)</span>
+
+<span class="hl std">df1</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl kwd">mutate</span><span class="hl std">(</span><span class="hl kwd">across</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">2</span><span class="hl opt">:</span><span class="hl num">5</span><span class="hl std">), comma))</span>
+
+<span class="hl std">df1</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl kwd">kbl</span><span class="hl std">()</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl kwd">kable_material_dark</span><span class="hl std">()</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl kwd">save_kable</span><span class="hl std">(</span><span class="hl kwc">file</span> <span class="hl std">=</span> <span class="hl str">&quot;table1.html&quot;</span><span class="hl std">,</span> <span class="hl kwc">self_contained</span> <span class="hl std">= T)</span>
+</pre></div>
+</div></div>
+
+</body>
+</html>

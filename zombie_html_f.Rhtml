@@ -1,0 +1,38 @@
+<html>
+
+<head>
+<title>Title</title>
+</head>
+
+<body>
+
+<p>This is an R HTML document. When you click the <b>Knit HTML</b> button a web page will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
+
+<!--begin.rcode
+library(tidyverse)
+library(scales)
+library(kableExtra)
+end.rcode-->
+
+<p>You can also embed plots, for example:</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+df <- tibble(
+  "Wave" = 1:75,
+  "FE Wave Reward" = 119700 + (Wave * 13300),
+  "FE Cumulative Reward" = cumsum(`FE Wave Reward`),
+  "Exp Wave Reward" = 14400 + (Wave * 1600),
+  "Exp Cumulative Reward" = cumsum(`Exp Wave Reward`)
+  )
+
+df1 <- df %>%
+  mutate(across(c(2:5), comma))
+
+df1 %>%
+  kbl() %>%
+  kable_material_dark() %>%
+  save_kable(file = "table1.html", self_contained = T)
+end.rcode-->
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+---
+title: "zombies_rmd"
+author: "Justyn"
+date: "20/11/2021"
+output: html_document
+---
+
+```{r include=FALSE}
+library(tidyverse)
+library(scales)
+library(kableExtra)
+```
+
+```{r echo=FALSE}
+df <- tibble(
+  "Wave" = 1:75,
+  "FE Wave Reward" = 119700 + (Wave * 13300),
+  "FE Cumulative Reward" = cumsum(`FE Wave Reward`),
+  "Exp Wave Reward" = 14400 + (Wave * 1600),
+  "Exp Cumulative Reward" = cumsum(`Exp Wave Reward`)
+  )
+
+df1 <- df %>%
+  mutate(across(c(2:5), comma))
+
+df1 %>%
+  kbl() %>%
+  kable_material_dark() 
+```
+
+
+
