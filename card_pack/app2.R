@@ -84,5 +84,6 @@ server <- function(input, output) {
 # Create Shiny app ----
 shinyApp(ui, server)
 
+#runGitHub("becausejustyn/twg/card_pack")
 
-runGitHub( "<your repository name>", "<your user name>")
+#https://github.com/becausejustyn/twg/tree/main/card_pack
